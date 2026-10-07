@@ -1,7 +1,7 @@
 ---
 title: "mb-submit-memory"
 doc-id: "mb-4aabe3b9"
-updated: "2026-10-04"
+updated: "2026-10-07"
 ---
 
 # mb-submit-memory
@@ -13,8 +13,7 @@ checked before it becomes permanent. Never calls `gbrain remember` or
 skips the contradiction check to save time — a placeholder value here
 would defeat the entire purpose of this skill existing.
 
-**One continuous run — same modus operandi as Docs Manager and
-mb-wikilinks.** `/mb-submit-memory (path)` is a single skill invocation
+**One continuous run.** `/mb-submit-memory (path)` is a single skill invocation
 covering learnings → backup → detect → report → approve → apply → verify →
 log → learnings. The run pauses in place at the report step and presents
 findings; the moment the developer replies with approval in the same
@@ -241,9 +240,7 @@ went wrong.
 
 ### Step 8 — Log
 
-Append to this skill's own log location — the real path is confirmed once,
-the same way it was confirmed for `mb-wikilinks` (`/mnt/c/mybizz/logs/`,
-in this skill's own subfolder): the file path submitted, the confidence
+Append to this skill's own log location — `/mnt/c/mybizz/logs/mb-submit-memory/`: the file path submitted, the confidence
 score and method used, whether a contradiction was detected, the real
 outcome (`promoted` or `under_review`), and the real `memory_id`.
 

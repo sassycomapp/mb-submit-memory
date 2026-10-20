@@ -1,7 +1,7 @@
 ---
 title: "mb-submit-memory"
 doc-id: "mb-4aabe3b9"
-updated: "2026-10-07"
+updated: "2026-10-20"
 ---
 
 # mb-submit-memory
@@ -67,8 +67,9 @@ Quote paths containing spaces.
      for something specific — it is a PDLF step's own systematic submission of its own
      work, and the credential used should say so honestly in the governor's own
      records.
-   Both credentials are read from wherever the developer has configured them —
-   never hardcode either literal credential value into this file. If it is genuinely
+   Both credentials are environment variables in `/home/dev-p/memory-governor/.env`:
+   `MEMORY_GOVERNOR_WRITER_MANUAL_SUBMISSION` and `MEMORY_GOVERNOR_WRITER_PDLF_STEP_SYNC`.
+   Refer to them only by these exact names; never write or print a value. If it is genuinely
    unclear which situation applies, ask the developer directly rather than guess.
 
 4. **Never submit a folder path in a single API call.** If the target path
@@ -200,8 +201,8 @@ Call the memory governor's real API:
 
 ```
 POST http://127.0.0.1:8321/memory/candidate
-Header: X-Governor-Credential: (the real credential value for whichever situation
-applies, per Section 0 item 3 — manual_submission or pdlf_step_sync)
+Header: X-Governor-Credential: $MEMORY_GOVERNOR_WRITER_MANUAL_SUBMISSION
+(or $MEMORY_GOVERNOR_WRITER_PDLF_STEP_SYNC, per Section 0 item 3)
 Body:
 {
   "owning_project": "(the project slug this content belongs to)",
@@ -220,6 +221,13 @@ Do not include the file's content directly in the request body — leave the
 `content` field out entirely. The governor reads the real file itself from
 `source_ref`. This is deliberate and already proven to work correctly;
 do not "help" by pasting the content in as well.
+
+Give the developer the submission as one WSL command in exactly this form, so the
+credential stays inside the command and never remains in the terminal:
+
+```bash
+(set -a; . /home/dev-p/memory-governor/.env; set +a; curl -sS -X POST http://127.0.0.1:8321/memory/candidate -H "X-Governor-Credential: $MEMORY_GOVERNOR_WRITER_MANUAL_SUBMISSION" -H "Content-Type: application/json" -d '(the body above, on one line)'; echo)
+```
 
 ### Step 7 — Verify
 

@@ -1,7 +1,7 @@
 ---
 title: "mb-submit-memory"
 doc-id: "mb-4aabe3b9"
-updated: "2026-10-20"
+updated: "2026-11-17"
 ---
 
 # mb-submit-memory
@@ -205,7 +205,7 @@ Header: X-Governor-Credential: $MEMORY_GOVERNOR_WRITER_MANUAL_SUBMISSION
 (or $MEMORY_GOVERNOR_WRITER_PDLF_STEP_SYNC, per Section 0 item 3)
 Body:
 {
-  "owning_project": "(the project slug this content belongs to)",
+  "owning_project": "(the documentation source of the project the fact belongs to, exactly as gbrain sources list names it, e.g. mb-3-cs-project-library; never a code repository and never a dormant project)",
   "visibility": "project_local",
   "retention": "long_term",
   "memory_type": "fact",
